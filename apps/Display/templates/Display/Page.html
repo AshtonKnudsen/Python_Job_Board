@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>load</title>
+    {% load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'Display/css/skeleton.css' %}" />
+    <script src="main.js"></script>
+</head>
+<body>
+    <h3>Check these jobs out</h3>
+    <a href="/logout">Logout</a>
+    <form action="/Display/new">
+        <input type="submit" value="New Job" class="button-primary">
+    </form>
+    <table>
+        <tr style="text-align:center;">
+            <th>Job</th>
+            <th>Location</th>
+            <th>Actions</th>
+        </tr>
+    {% for j in jobs %}
+        <tr>
+            <td>{{j.job_title}}</td>
+            <td>{{j.location}}</td>
+            <td>
+                <a href="/Display/view/{{j.id}}">View</a>
+                {% if request.session.id == j.user.id %}
+                    <a href="/Display/delete/{{j.id}}">Remove</a>
+                    <a href="/Display/edit/{{j.id}}">Edit</a>
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+    </table>
+    
+</body>
+</html>
