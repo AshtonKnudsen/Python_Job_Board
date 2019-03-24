@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>View Job</title>
+    {% load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'Display/css/skeleton.css' %}" />
+    <script src="main.js"></script>
+</head>
+<body>
+    <h1>Here are the details of this Job</h1>
+    <a href="/logout">Logout</a>
+    <a href="/Display/LoadPage">  Job Listings</a>
+        <h5>{{job.job_title}}</h5>
+        <div style="border: 1px solid black; width: 400px;text-align: center;">
+            <p>{{job.description}}</p>
+            <p>Location: {{job.location}}</p>
+            <p>Posted By: {{job.user.first_name}}</p>
+            <p>Posted on: {{job.created_at}}</p>
+        </div>
+        {% if request.session.id == job.user.id %}
+        <a href="/Display/edit/{{job.id}}">Edit</a>
+        <a href="/Display/delete/{{job.id}}">Remove</a>
+        {% endif %}
+</body>
+</html>
