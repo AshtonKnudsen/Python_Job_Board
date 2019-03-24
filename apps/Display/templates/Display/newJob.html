@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Make New Job</title>
+    {% load static %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'Display/css/skeleton.css' %}" />
+    <script src="main.js"></script>
+</head>
+
+<body>
+    <h1>Add New Job</h1>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <a href="/logout">Logout</a>
+    <a href="/Display/LoadPage">  Job Listings</a>
+    <form action="/Display/process" method="POST">
+    {% csrf_token %}
+        <h4>Title</h4>
+        <input type="text" name="title">
+        <h4>Description</h4>
+        <input type="text" name="description">
+        <h4>Location</h4>
+        <input type="text" name="location">
+        <input type="submit" value="Create New Job" class="button-primary">
+    </form>
+    <form action="/Display/LoadPage">
+        <input type="submit" value="Cancel">
+    </form>
+
+</body>
+
+</html>
